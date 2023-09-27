@@ -14,6 +14,7 @@ class MovieList {
 
   addMovie(movie) {
     this.watchlist.push(movie);
+    
   }
 
   removeMovie(movie) {

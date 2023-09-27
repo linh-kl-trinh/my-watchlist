@@ -1,3 +1,19 @@
+body {
+  font-family: 'Pacifico', cursive;
+}
+
+button {
+  font-family: 'Pacifico', cursive;
+}
+
+input {
+  font-family: 'Pacifico', cursive;
+}
+
+ul {
+  list-style-type: none;
+}
+
 .App {
   text-align: center;
 }
@@ -23,7 +39,7 @@ h1 {
 
 .list-button {
   background-color: #61dafb;
-  color: white;
+  color: #61dafb;
   border: none;
   padding: 10px 20px;
   margin: 5px;
@@ -37,4 +53,41 @@ h1 {
 
 .main-content {
   padding: 20px;
+}
+
+.scrollable-container {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.add-movie-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+}
+
+.navbar button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 5px 5px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.navbar button:hover {
+  background-color: #777;
+}
+
+.App-footer {
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
