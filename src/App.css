@@ -1,23 +1,44 @@
+/* Global Styles */
 body {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Inter';
 }
 
 button {
-  font-family: 'Pacifico', cursive;
+  color: var(--Onyx, #000);
+  cursor: pointer;
+  width: 100px;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  border: 2px solid var(--Onyx, #000);
+  background: var(--Green, #D5FCC5);
+  box-shadow: 4px 4px 0px 0px #000;
+}
+
+button:hover {
+  background-color: #777;
+  color: #fff;
 }
 
 input {
-  font-family: 'Pacifico', cursive;
+  width: 75px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
 }
 
 ul {
   list-style-type: none;
 }
 
+/* App Container */
 .App {
   text-align: center;
 }
 
+/* Header Styles */
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
@@ -33,24 +54,7 @@ h1 {
   margin: 0;
 }
 
-.list-buttons {
-  margin-top: 20px;
-}
-
-.list-button {
-  background-color: #61dafb;
-  color: #61dafb;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.list-button.active {
-  background-color: #007bff;
-}
-
+/* Main Content Styles */
 .main-content {
   padding: 20px;
 }
@@ -69,19 +73,20 @@ h1 {
   padding: 5px;
 }
 
-.navbar button {
-  background-color: #555;
+/* Navbar Styles */
+.navbar a {
   color: white;
   border: none;
-  padding: 5px 5px;
+  padding: 5px 15px;
   cursor: pointer;
-  width: 100px;
+  font-size: 15px;
 }
 
-.navbar button:hover {
-  background-color: #777;
+.navbar a:hover {
+  color: var(--Green, #D5FCC5);
 }
 
+/* Footer Styles */
 .App-footer {
   background-color: #282c34;
   color: white;

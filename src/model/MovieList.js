@@ -1,38 +1,32 @@
 class MovieList {
   constructor(name) {
     this.name = name;
-    this.watchlist = [];
-  }
-
-  getName() {
-    return this.name;
-  }
-
-  getWatchlist() {
-    return this.watchlist;
+    this.movies = [];
   }
 
   addMovie(movie) {
-    this.watchlist.push(movie);
+    this.movies.push(movie);
     
   }
 
   removeMovie(movie) {
-    this.watchlist = this.watchlist.filter((m) => m !== movie);
+    this.movies = this.movies.filter((m) => m !== movie);
   }
 
   sortByYear() {
-    return this.watchlist
-    .slice()
-    .sort((a, b) => b.getYear() - a.getYear());
+    this.movies.sort((a, b) => b.year - a.year);
   }
 
-  toJson() {
-    return {
-      name: this.name,
-      watchlist: this.watchlist
-    };
+  sortByRating() {
+    this.movies.sort((a, b) => b.rating - a.rating);
   }
+
+  // toJson() {
+  //   return {
+  //     name: this.name,
+  //     movies: this.movies
+  //   };
+  // }
 }
 
 export default MovieList;
