@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Movie Collection App
+
+This web application, built with React.js, is an adaptation of [this](https://github.com/linh-kl-trinh/movie-collection-app-java) Java application project. It allows users to effectively organize and categorize their movie collections across various lists.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
