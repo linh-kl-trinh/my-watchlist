@@ -2,6 +2,10 @@
 
 This web application, built with React.js, is an adaptation of [this](https://github.com/linh-kl-trinh/movie-collection-app-java) Java application project. It employs JavaScript, CSS, and HTML for functionality and appearance. The application communicates with an external Movie Database API to retrieve details of movies based on the movie titles provided by users. Users can add or remove movies, sort them according to certain criteria, and move them between different lists. The application also ensures data persistence by offering save and load functionalities on local storage.
 
+## Walkthrough
+
+![my-watchlist-walkthrough](https://github.com/linh-kl-trinh/my-watchlist/assets/102343902/6a730c0b-3004-47a9-a649-6163e76365d9)
+
 ## Attribution
 
 This project uses data and/or images provided by [The Movie Database (TMDB)](https://www.themoviedb.org/).
