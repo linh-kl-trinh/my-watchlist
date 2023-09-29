@@ -51,10 +51,10 @@ function MovieDetails({ movie }) {
         />
       </div>
       <div className="details-container">
-        <p>Release date: {details.date}</p>
-        <p>Rating: {details.rating}</p>
-        <p>Popularity score: {details.popularity}</p>
-        <p>Overview: {details.overview}</p>
+        <p><b>Release date: </b>{details.date}</p>
+        <p><b>Rating: </b>{details.rating}</p>
+        <p><b>Popularity score: </b>{details.popularity}</p>
+        <p><b>Overview: </b>{details.overview}</p>
       </div>
     </div>
   );

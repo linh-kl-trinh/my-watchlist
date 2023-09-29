@@ -71,7 +71,7 @@ function App() {
     const activeMovieList = collection[activeList];
     activeMovieList.sortByPopularity();
     setMovies([...activeMovieList.movies]);
-  }
+  };
 
   // Move a movie to another list
   const handleMoveMovie = (movie, targetList) => {
@@ -128,7 +128,7 @@ function App() {
       });
   
       setCollection(newCollection);
-      setActiveList('waiting');
+      handleListChange('waiting');
     }
   }; 
 

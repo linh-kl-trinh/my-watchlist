@@ -1,6 +1,6 @@
 /* Global Styles */
 body {
-  font-family: 'Inter';
+  font-family: 'Comic Sans', cursive;
 }
 
 button {
@@ -14,6 +14,7 @@ button {
   border: 2px solid var(--Onyx, #000);
   background: var(--Green, #D5FCC5);
   box-shadow: 4px 4px 0px 0px #000;
+  font-family: 'Comic Sans', cursive; 
 }
 
 button:hover {
@@ -37,6 +38,11 @@ input {
   margin-right: 5px;
   margin-bottom: 5px;
   border-radius: 4px;
+  font-family: 'Comic Sans', cursive; 
+}
+
+select {
+  font-family: 'Comic Sans', cursive; 
 }
 
 ul {
