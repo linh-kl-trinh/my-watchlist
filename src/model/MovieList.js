@@ -13,20 +13,17 @@ class MovieList {
     this.movies = this.movies.filter((m) => m !== movie);
   }
 
-  sortByYear() {
-    this.movies.sort((a, b) => b.year - a.year);
+  sortByDate() {
+    this.movies.sort((a, b) => b.date - a.date);
   }
 
   sortByRating() {
     this.movies.sort((a, b) => b.rating - a.rating);
   }
 
-  // toJson() {
-  //   return {
-  //     name: this.name,
-  //     movies: this.movies
-  //   };
-  // }
+  sortByPopularity() {
+    this.movies.sort((a, b) => b.popularity - a.popularity);
+  }
 }
 
 export default MovieList;

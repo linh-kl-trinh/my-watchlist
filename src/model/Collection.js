@@ -7,12 +7,6 @@ class Collection {
     this.finished = new MovieList('finished');
     this.dropped = new MovieList('dropped');
   }
-  
-  // toJson() {
-  //   return {
-  //     lists: this.lists
-  //   };
-  // }
 }
 
 export default Collection;

@@ -1,82 +1,98 @@
+/* eslint-disable no-undef */
 import React, { useState } from 'react';
 import './App.css';
 import MovieList from './model/MovieList';
 import Movie from './model/Movie';
 import Collection from './model/Collection';
+import MovieDetails from './model/MovieDetails';
+
+const API_KEY = process.env.REACT_APP_API_KEY;
+const BASE_URL = 'https://api.themoviedb.org/3/search';
 
 function App() {
   const [activeList, setActiveList] = useState('waiting');
   const [selectedList, setSelectedList] = useState('waiting');
   const [movieTitle, setMovieTitle] = useState('');
-  const [movieYear, setMovieYear] = useState('');
-  const [movieRating, setMovieRating] = useState('');
   const [movies, setMovies] = useState([]);
   const [collection, setCollection] = useState(new Collection());
 
-  const handleAddMovie = () => {
-    const newMovie = new Movie(movieTitle, parseInt(movieYear, 10));
-    newMovie.giveRating(parseFloat(movieRating));
+  const handleAddMovie = async () => {
+    if (movieTitle) {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/movie?query=${movieTitle}&api_key=${API_KEY}`
+        );
+        const data = await response.json();
+        if (data.results && data.results.length > 0) {
+          const result = data.results[0];
+          const newMovie = new Movie(
+            result.title,
+            result.release_date,
+            result.poster_path,
+            result.overview,
+            result.vote_average
+          );
 
-    const activeMovieList = collection[activeList];
-    activeMovieList.addMovie(newMovie);
-    setMovies([...activeMovieList.movies]);
-    
-    setMovieTitle('');
-    setMovieYear('');
-    setMovieRating('');
-  }
+          const activeMovieList = collection[activeList];
+          activeMovieList.addMovie(newMovie);
+          setMovies([...activeMovieList.movies]);
 
+          setMovieTitle('');
+        }
+      } catch (error) {
+        console.error('Error adding movie:', error);
+      }
+    }
+  };
+
+  // Remove a movie from the active list
   const handleRemoveMovie = (movie) => {
     const activeMovieList = collection[activeList];
     activeMovieList.removeMovie(movie);
     setMovies([...activeMovieList.movies]);
   };
 
-  const handleSortByYear = () => {
+  // Sort movies by release date
+  const handleSortByDate = () => {
     const activeMovieList = collection[activeList];
-    activeMovieList.sortByYear();
+    activeMovieList.sortByDate();
     setMovies([...activeMovieList.movies]);
-  }
+  };
 
+  // Sort movies by rating
   const handleSortByRating = () => {
     const activeMovieList = collection[activeList];
     activeMovieList.sortByRating();
     setMovies([...activeMovieList.movies]);
+  };
+
+  // Sort movies by popularity
+  const handleSortByPopularity = () => {
+    const activeMovieList = collection[activeList];
+    activeMovieList.sortByPopularity();
+    setMovies([...activeMovieList.movies]);
   }
 
-  const handleChangeMovieTitle = (movie, newTitle) => {
-    movie.rename(newTitle);
-    setMovies([...movies]);
-  };
-
-  const handleChangeMovieYear = (movie, newYear) => {
-    movie.changeYear(parseInt(newYear, 10));
-    setMovies([...movies]);
-  };
-
-  const handleChangeMovieRating = (movie, newRating) => {
-    movie.giveRating(parseFloat(newRating));
-    setMovies([...movies]);
-  };
-
+  // Move a movie to another list
   const handleMoveMovie = (movie, targetList) => {
     const currentList = collection[activeList];
     currentList.removeMovie(movie);
-
     setMovies([...currentList.movies]);
-  
+
     const targetMovieList = collection[targetList];
     targetMovieList.addMovie(movie);
 
-    handleListChange(targetMovieList.name);
+    handleListChange(targetList);
   };
 
+  // Change the active list
   const handleListChange = (listName) => {
     setActiveList(listName);
     const activeMovieList = collection[listName];
     setMovies([...activeMovieList.movies]);
   };
 
+  // Save collection data to local storage
   const saveDataToLocal = (data) => {
     localStorage.setItem('movieCollection', JSON.stringify(data));
   };
@@ -103,9 +119,8 @@ function App() {
         if (listData) {
           const newList = new MovieList(listData.name);
           newList.movies = listData.movies.map((movieData) => {
-            const { title, year, rating } = movieData;
-            const movie = new Movie(title, year);
-            movie.giveRating(rating);
+            const { title, date, poster, overview, rating, popularity } = movieData;
+            const movie = new Movie(title, date, poster, overview, rating, popularity);
             return movie;
           });
           newCollection[listName] = newList;
@@ -115,41 +130,29 @@ function App() {
       setCollection(newCollection);
       setActiveList('waiting');
     }
-  };  
+  }; 
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>my watchlist</h1>
+        <h1>My Watchlist</h1>
         <nav className="navbar">
-          <a onClick={() => handleListChange('waiting')}>waiting</a>
-          <a onClick={() => handleListChange('watching')}>watching</a>
-          <a onClick={() => handleListChange('finished')}>finished</a>
-          <a onClick={() => handleListChange('dropped')}>dropped</a>
+          <a onClick={() => handleListChange('waiting')}>Waiting</a>
+          <a onClick={() => handleListChange('watching')}>Watching</a>
+          <a onClick={() => handleListChange('finished')}>Finished</a>
+          <a onClick={() => handleListChange('dropped')}>Dropped</a>
         </nav>
       </header>
       <main className="scrollable-container">
-        <h2>{activeList}</h2>
-        <button onClick={() => handleSortByYear()}>latest</button>
-        <button onClick={() => handleSortByRating()}>best</button>
+        <h2>Been {activeList} for a while...</h2>
+        Sort by:&nbsp;
+        <button onClick={() => handleSortByDate()}>Release date</button>
+        <button onClick={() => handleSortByRating()}>Rating</button>
+        <button onClick={() => handleSortByPopularity()}>Popularity</button>
         <ul>
           {movies.map((movie, index) => (
             <li key={index}>
-              <input
-                type="text"
-                value={movie.title}
-                onChange={(e) => handleChangeMovieTitle(movie, e.target.value)}
-              />
-              <input
-                type="number"
-                value={movie.year}
-                onChange={(e) => handleChangeMovieYear(movie, e.target.value)}
-              />
-              <input
-                type="number"
-                value={movie.rating}
-                onChange={(e) => handleChangeMovieRating(movie, e.target.value)}
-              />
+              Move to:&nbsp;
               <select
                 value={selectedList}
                 onChange={(e) => setSelectedList(e.target.value)}
@@ -167,38 +170,27 @@ function App() {
                   }
                 }}
               >
-                move
+                Move
               </button>
-              <button onClick={() => handleRemoveMovie(movie)}>remove</button>
+              <button onClick={() => handleRemoveMovie(movie)}>Remove</button>
+              <MovieDetails movie={movie} />
             </li>
           ))}
         </ul>
-        </main>
-        <footer className="App-footer">
+      </main>
+      <footer className="App-footer">
         <div className="add-movie-form">
-            <input
-              type="text"
-              placeholder="title"
-              value={movieTitle}
-              onChange={(e) => setMovieTitle(e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="year"
-              value={movieYear}
-              onChange={(e) => setMovieYear(e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="rating"
-              value={movieRating}
-              onChange={(e) => setMovieRating(e.target.value)}
-            />
-            <button onClick={handleAddMovie}>add</button>
+          <input
+            type="text"
+            placeholder="title"
+            value={movieTitle}
+            onChange={(e) => setMovieTitle(e.target.value)}
+          />
+          <button onClick={handleAddMovie}>Add</button>
         </div>
         <div className="save-load-buttons">
-          <button onClick={() => handleLoadData()}>load</button>
-          <button onClick={() => handleSaveData()}>save</button>
+          <button onClick={() => handleLoadData()}>Load</button>
+          <button onClick={() => handleSaveData()}>Save</button>
         </div>
       </footer>
     </div>

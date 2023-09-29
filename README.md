@@ -2,6 +2,12 @@
 
 This web application, built with React.js, is an adaptation of [this](https://github.com/linh-kl-trinh/movie-collection-app-java) Java application project. It allows users to effectively organize and categorize their movie collections across various lists.
 
+## Attribution
+
+This project uses data and/or images provided by [The Movie Database (TMDB)](https://www.themoviedb.org/).
+
+![TMDB Logo](https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg)
+
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

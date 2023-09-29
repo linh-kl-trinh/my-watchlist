@@ -1,29 +1,12 @@
 class Movie {
-  constructor(title, year) {
+  constructor(title, date, poster, overview, rating, popularity) {
     this.title = title;
-    this.year = year;
-    this.rating = 0;
-  }
-
-  rename(title) {
-    this.title = title;
-  }
-
-  changeYear(year) {
-    this.year = year;
-  }
-
-  giveRating(rating) {
+    this.date = new Date(date);
+    this.poster = poster;
+    this.overview = overview;
     this.rating = rating;
+    this.popularity = popularity;
   }
-
-  // toJson() {
-  //   return {
-  //     title: this.title,
-  //     year: this.year,
-  //     rating: this.rating
-  //   };
-  // }
 }
 
 export default Movie;

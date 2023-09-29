@@ -21,6 +21,16 @@ button:hover {
   color: #fff;
 }
 
+/* Remove left margin for the first button */
+button:first-child {
+  margin-left: 0;
+}
+
+/* Remove right margin for the last button */
+button:last-child {
+  margin-right: 0;
+}
+
 input {
   width: 75px;
   margin-left: 5px;
@@ -60,7 +70,7 @@ h1 {
 }
 
 .scrollable-container {
-  max-height: 300px;
+  max-height: calc(100vh - 20vh);
   overflow: auto;
 }
 
@@ -71,6 +81,35 @@ h1 {
   align-items: center;
   text-align: center;
   padding: 5px;
+}
+
+.movie-details-container {
+  display: flex;
+  align-items: center;
+  padding-right: 100px;
+  padding-left: 100px;
+  padding-bottom: 10px;
+}
+
+/* .title-image-container {
+  flex: 1;
+  padding-right: 10px;
+} */
+
+.title-image-container h3 {
+  margin: 0;
+}
+
+.details-container {
+  flex: 1;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Style for the image */
+.title-image-container img {
+  max-width: 100px;
+  height: auto;
 }
 
 /* Navbar Styles */
@@ -91,7 +130,6 @@ h1 {
   background-color: #282c34;
   color: white;
   text-align: center;
-  padding: 20px;
   position: fixed;
   bottom: 0;
   width: 100%;
